@@ -2,6 +2,7 @@ package com.caduser.model;
 
 import com.caduser.dto.UsuarioCadastroRequestDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Usuario {
@@ -17,15 +18,20 @@ public class Usuario {
     @OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Endereco endereco;
 
-    public Usuario(){
+    public Usuario() {}
+
+    public Usuario(String email, String cpf, String nome, String senha) {
+        this.email = email;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.senha = senha;
     }
 
-    public Usuario(UsuarioCadastroRequestDto usuarioDto){
-        this.nome = usuarioDto.nome();
-        this.cpf = usuarioDto.cpf();
-        this.email = usuarioDto.email();
-        this.senha = usuarioDto.senha();
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
-
+    public String getEmail() {
+        return email;
+    }
 }

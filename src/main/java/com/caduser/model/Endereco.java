@@ -16,7 +16,21 @@ public class Endereco {
     private String numero;
 
     @OneToOne()
-    @JoinColumn(name = "endereco")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    public Endereco() {}
+
+    public Endereco(String numero, String estado, String cidade, String rua, String bairro, String cep) {
+        this.numero = numero;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cep = cep;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
