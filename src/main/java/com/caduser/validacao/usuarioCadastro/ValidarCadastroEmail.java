@@ -1,15 +1,12 @@
-package com.caduser.validacao.usuario;
+package com.caduser.validacao.usuarioCadastro;
 
 import com.caduser.dto.UsuarioCadastroRequestDto;
 import com.caduser.exception.UsuarioEmailException;
-import com.caduser.model.Usuario;
 import com.caduser.repository.UsuarioRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class ValidarCadastroEmail implements ValidacaoUsuario{
+public class ValidarCadastroEmail implements ValidacaoCadastroUsuario {
 
     private UsuarioRepository usuarioRepository;
 

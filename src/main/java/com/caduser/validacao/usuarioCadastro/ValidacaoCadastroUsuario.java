@@ -1,8 +1,8 @@
-package com.caduser.validacao.usuario;
+package com.caduser.validacao.usuarioCadastro;
 
 import com.caduser.dto.UsuarioCadastroRequestDto;
 
-public interface ValidacaoUsuario {
+public interface ValidacaoCadastroUsuario {
 
     void validar(UsuarioCadastroRequestDto dto);
 }

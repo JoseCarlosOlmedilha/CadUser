@@ -1,17 +1,14 @@
-package com.caduser.validacao.usuario;
+package com.caduser.validacao.usuarioCadastro;
 
 import com.caduser.dto.UsuarioCadastroRequestDto;
 import com.caduser.exception.UsuarioEmailException;
-import com.caduser.model.Usuario;
-import com.caduser.repository.UsuarioRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class ValidarFormatoEmail implements ValidacaoUsuario{
+public class ValidarCadastroFormatoEmail implements ValidacaoCadastroUsuario {
 
     @Override
     public void validar(UsuarioCadastroRequestDto dto) {

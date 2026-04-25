@@ -1,17 +1,15 @@
 package com.caduser.service;
 
+import com.caduser.dto.UsuarioAtualizacaoRequestDto;
 import com.caduser.dto.UsuarioCadastroRequestDto;
 import com.caduser.exception.UsuarioExceprtion;
 import com.caduser.model.Endereco;
 import com.caduser.model.Usuario;
 import com.caduser.repository.UsuarioRepository;
-import com.caduser.validacao.usuario.ValidacaoUsuario;
-import jakarta.persistence.Access;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.caduser.validacao.usuarioCadastro.ValidacaoCadastroUsuario;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -19,9 +17,9 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     private EnderecoService enderecoService;
 
-    List<ValidacaoUsuario> validacoes;
+    List<ValidacaoCadastroUsuario> validacoes;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, EnderecoService enderecoService, List<ValidacaoUsuario> validacoes) {
+    public UsuarioService(UsuarioRepository usuarioRepository, EnderecoService enderecoService, List<ValidacaoCadastroUsuario> validacoes) {
         this.usuarioRepository = usuarioRepository;
         this.enderecoService = enderecoService;
         this.validacoes = validacoes;
@@ -68,8 +66,19 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public void atualizarUsuario(UsuarioCadastroRequestDto usuarioDto){
+    public Usuario atualizarUsuario(Long id, UsuarioAtualizacaoRequestDto usuarioDto){
+        Usuario usuario = buscarUsuario(id);
 
+        if (usuarioRepository.existsByEmailAndIdNot(usuarioDto.email(), id)){
+            throw new UsuarioExceprtion("Email já cadastrado");
+        }
+
+        usuario.setNome(usuarioDto.nome());
+        usuario.setEmail(usuarioDto.email());
+
+        usuarioRepository.save(usuario);
+
+        return usuario;
     }
 
 
